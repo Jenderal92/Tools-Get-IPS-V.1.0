@@ -31,6 +31,7 @@ print Fore.YELLOW + "2 .Api From abuseipdb.com" + Fore.WHITE
 print Fore.YELLOW + "3. Api From bitverzo.com" + Fore.WHITE
 print Fore.YELLOW + "4. Api From macrobyte.net" + Fore.WHITE
 print Fore.YELLOW + "5. Api From viewsforcash.com" + Fore.WHITE
+print Fore.YELLOW + "6. Delete Duplicate Domain" + Fore.WHITE
 
 shinpilih = raw_input('\nChoose : ')
 print "==========" 
@@ -126,14 +127,19 @@ def getipe5():
 		pass
 
 def DELETE_DUPLICATE():
-	with open('result.txt', 'r') as SHINXX:
+	try:
+		file = raw_input('LIST : ')
+		SHINXX = open(file, 'r')
 		SHINXXX = list(dict.fromkeys(SHINXX.read().splitlines()))
-		with open('result.txt.tmp','a') as new:
+		with open(file+'.tmp','a') as new:
 			new.write('\n'.join(SHINXXX))
 			new.close()
-		SHINXX.close()
-	os.remove('result.txt')
-	os.rename('result.txt.tmp','result.txt')
+			SHINXX.close()
+		os.remove(file)
+		os.rename(file+'.tmp',file)
+		print('DONE REMOVE DUPLICATE !!!')
+	except:
+		pass
 
 def Main():
 	try:
@@ -147,9 +153,11 @@ def Main():
 			getipe4()
 		elif shinpilih == '5':
 			getipe5()
+		elif shinpilih == '6':
+			DELETE_DUPLICATE()
 	except:
 		pass
 
 if __name__ == '__main__':
 	Main()
-	DELETE_DUPLICATE()
+	
